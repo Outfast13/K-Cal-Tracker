@@ -21,7 +21,28 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Automatically installs Gradle 8.7 on the server so gradlew isn't required
+      # Automatically writes the exact settings file right into the build root
+      - name: Auto-generate settings.gradle.kts
+        run: |
+          cat << 'EOF' > settings.gradle.kts
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+          rootProject.name = "K-Cal-Tracker"
+          include(":app")
+          EOF
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -29,13 +50,7 @@ jobs:
           cache-disabled: true
 
       - name: Build Debug APK
-        run: |
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew assembleDebug --stacktrace
-          else
-            gradle assembleDebug --stacktrace
-          fi
+        run: gradle assembleDebug --stacktrace
 
       - name: Publish Version Release
         uses: softprops/action-gh-release@v2
