@@ -1,0 +1,10 @@
+{
+  "name": "KcalTracker - Offline Android & Web Calorie Tracker",
+  "description": "An offline-first calorie tracker with custom barcode mapping, nutrition label OCR scanner, Pakistani and international food databases, and full Room DB / JSON backup.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
