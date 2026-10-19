@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.3.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:1.9.23-1.0.20")
+    }
+}
+
 plugins {
     id("com.android.application") version "8.3.2" apply false
     id("org.jetbrains.kotlin.android") version "1.9.23" apply false
